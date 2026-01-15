@@ -8,6 +8,9 @@ TagManager:
   - Brick
   - Door
   - Border
+  - DeathZone
+  - DeathZoneGround
+  - Pillar
   layers:
   - Default
   - TransparentFX

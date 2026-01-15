@@ -14,7 +14,9 @@ public class DeathZone : MonoBehaviour
             triggered = true;
             GameManager.instance.StartOver();
         }
+       
     }
+
     // Start is called before the first frame update
     void Start()
     {

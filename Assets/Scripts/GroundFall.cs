@@ -5,7 +5,7 @@ using UnityEngine;
 public class GroundFall : MonoBehaviour
 {
     public Transform player;
-    public float triggerDistance = 3f;
+    public float triggerDistance = 1.5f;
     private Rigidbody2D rb;
     private bool hasFallen = false;
     void Awake()
@@ -13,6 +13,14 @@ public class GroundFall : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.gravityScale = 0f;
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("DeathZoneGround"))
+        {
+            
+            Destroy(gameObject);
+        }
     }
     void Update()
     {

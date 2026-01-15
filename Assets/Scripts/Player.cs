@@ -2,6 +2,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -19,25 +20,37 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Player>();
+        transform.localScale = new Vector3(-1f, 1f, 1f);
     }
-    //void OnTriggerEnter2D(Collider2D other)
-    //{
-
-
-    //    if (other.CompareTag("Brick"))
-    //    {
-    //        m_animator.SetTrigger("Death");
-    //        m_animator.StopPlayback();
-
-
-    //    }
-    //}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Brick") && !m_isDead)
+        {
+            // Brick yukarıdan aşağı düşüyorsa
+            if (collision.relativeVelocity.y < -1f)
+            {
+                Die();
+            }
+        }
+        else if (collision.gameObject.CompareTag("Pillar") && !m_isDead)
+{
+            {
+                if (collision.relativeVelocity.y < -1f)
+                {
+                    Die();
+                }
+            }
+        }
+    }
         // Update is called once per frame
         void Update()
         {
+            if (GameManager.instance != null && GameManager.instance.inputLocked)
+                return;
             //Check if character just landed on the ground
             if (!m_grounded && m_groundSensor.State())
             {
@@ -116,5 +129,45 @@ public class Player : MonoBehaviour
             else
                 m_animator.SetInteger("AnimState", 0);
         }
+
+    public IEnumerator ResetPlayerState()
+    {
+        yield return null; // 1 frame bekle (trigger / collider temizlensin)
+
+        // Hareketi tamamen durdur
+        m_body2d.velocity = Vector2.zero;
+
+        // Animator state'lerini resetle
+        m_animator.Rebind();
+        m_animator.Update(0f);
+
+        // Yerde kabul et
+        m_grounded = true;
+        m_animator.SetBool("Grounded", true);
+
+        // Ölüm vb. durumlar kapansın
+        m_isDead = false;
     }
+    void Die()
+    {
+        if (m_isDead) return; // Çift tetiklenmesin
+
+        m_isDead = true;
+
+        m_animator.SetTrigger("Death"); // 🎬 Ölüm animasyonu
+
+        // Hareketi tamamen kes
+        m_body2d.velocity = Vector2.zero;
+        m_body2d.simulated = false;
+
+        // Sahneyi biraz bekleyip resetle
+        StartCoroutine(DieRoutine());
+    }
+    IEnumerator DieRoutine()
+    {
+        yield return new WaitForSeconds(0.6f); // ⬅️ animasyona göre ayarla
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+}
 

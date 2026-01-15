@@ -15,5 +15,6 @@ UserSettings/
 *.pdb
 *.mdb
 
+.vs/
 .vscode/
 .idea/
