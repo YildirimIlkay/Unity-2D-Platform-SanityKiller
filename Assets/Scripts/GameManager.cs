@@ -76,6 +76,12 @@ public class GameManager : MonoBehaviour
             case 6:
                 SetPositions(new Vector3(200, 2, -10), new Vector2(192, 0), new Vector2(191, 9), new Vector2(209, 9));
                 break;
+            case 7:
+                SetPositions(new Vector3(240, 2, -10), new Vector2(232, 0), new Vector2(231, 9), new Vector2(249, 9));
+                break;
+            case 8:
+                SetPositions(new Vector3(280, 2, -10), new Vector2(272, 0), new Vector2(271, 9), new Vector2(289, 9));
+                break;
         }
     }
     public void StartOver()

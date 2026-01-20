@@ -44,6 +44,18 @@ public class Player : MonoBehaviour
                     Die();
                 }
             }
+            
+        }
+        else if(collision.gameObject.CompareTag("MovingGround") && !m_isDead)
+        {
+            if (collision.relativeVelocity.x < -1f)
+            {
+                Die();
+            }
+        }
+        else if(collision.gameObject.CompareTag("Spikes") && !m_isDead)
+        {
+            Die();
         }
     }
         // Update is called once per frame

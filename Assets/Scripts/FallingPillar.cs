@@ -14,11 +14,8 @@ public class FallingPillar : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 1f;
-
-        // SADECE pozisyonu kilitle, rotation SERBEST
         rb.constraints = RigidbodyConstraints2D.FreezePositionX |
                          RigidbodyConstraints2D.FreezePositionY;
     }
@@ -38,14 +35,8 @@ public class FallingPillar : MonoBehaviour
     void Fall()
     {
         hasFallen = true;
-
-        // Kilitleri tamamen kaldýr
         rb.constraints = RigidbodyConstraints2D.None;
-
-        // Yerçekimi aç
         rb.gravityScale = gravity;
-
-        // Z ekseninde + yönde devrilme
         rb.AddTorque(torqueForce, ForceMode2D.Impulse);
     }
 }

@@ -11,6 +11,8 @@ TagManager:
   - DeathZone
   - DeathZoneGround
   - Pillar
+  - MovingGround
+  - Spikes
   layers:
   - Default
   - TransparentFX

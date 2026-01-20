@@ -11,9 +11,6 @@ public class MoveableDoorTrigger : MonoBehaviour
     public GameObject ground;
     public GameObject brickLvl5;
 
-
-
-
     void OnTriggerEnter2D(Collider2D other)
     {
         //if (triggered) return;
