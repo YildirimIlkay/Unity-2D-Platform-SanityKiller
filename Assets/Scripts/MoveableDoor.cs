@@ -9,6 +9,8 @@ public class MoveableDoorTrigger : MonoBehaviour
     public Transform Door;
     public BoxCollider2D DoorBc;
     public GameObject ground;
+    public GameObject brickLvl5;
+
 
 
 
@@ -24,6 +26,7 @@ public class MoveableDoorTrigger : MonoBehaviour
             {
                 GameManager.instance.NextLevel();
             }
+            brickLvl5.SetActive(true); 
             timeTriggered++;
             Door.transform.position = new Vector3(167,0,5);
             DoorBc.transform.position = new Vector3(167,0,5);

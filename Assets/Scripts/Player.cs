@@ -148,13 +148,14 @@ public class Player : MonoBehaviour
         // Ölüm vb. durumlar kapansın
         m_isDead = false;
     }
+
     void Die()
     {
         if (m_isDead) return; // Çift tetiklenmesin
 
         m_isDead = true;
 
-        m_animator.SetTrigger("Death"); // 🎬 Ölüm animasyonu
+        m_animator.SetTrigger("Death"); //  Ölüm animasyonu
 
         // Hareketi tamamen kes
         m_body2d.velocity = Vector2.zero;

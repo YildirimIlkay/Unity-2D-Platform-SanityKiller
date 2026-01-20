@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -72,6 +72,9 @@ public class GameManager : MonoBehaviour
                 break;
             case 5:
                 SetPositions(new Vector3(160, 2, -10), new Vector2(152, 0), new Vector2(151, 9), new Vector2(169, 9));
+                break;
+            case 6:
+                SetPositions(new Vector3(200, 2, -10), new Vector2(192, 0), new Vector2(191, 9), new Vector2(209, 9));
                 break;
         }
     }
